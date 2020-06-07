@@ -11,12 +11,13 @@
 # **************************************************************************** #
 
 NAME = 42run
-SRC = 	./src/main.cpp
+SRC = ./src/main.cpp
 OBJECTS = $(SRC:.cpp=.o)
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -std=c++11 -Wall -Wextra -Werror
 INCLUDES = -I include -I GLFW/include
 FRAMEWORKS = -framework OpenGL -framework Cocoa -framework IOKit
-LIBGLFW = ./GLFW/lib-macos/libglfw3.a
+LIBGLFW = -L./GLFW/lib-macos -lglfw3
+
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
