@@ -11,7 +11,11 @@
 # **************************************************************************** #
 
 NAME = 42run
-SRC = ./src/main.cpp
+SRC =	./src/main.cpp \
+		./src/application.cpp \
+		./src/render.cpp \
+		./src/shader.cpp \
+		./src/utils.cpp
 OBJECTS = $(SRC:.cpp=.o)
 FLAGS = -std=c++11 -Wall -Wextra -Werror
 INCLUDES = -I include -I GLFW/include
