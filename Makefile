@@ -15,7 +15,9 @@ SRC =	./src/main.cpp \
 		./src/application.cpp \
 		./src/render.cpp \
 		./src/shader.cpp \
-		./src/utils.cpp
+		./src/utils.cpp \
+		./src/events.cpp \
+		./src/model.cpp
 OBJECTS = $(SRC:.cpp=.o)
 FLAGS = -std=c++11 -Wall -Wextra -Werror
 INCLUDES = -I include -I GLFW/include

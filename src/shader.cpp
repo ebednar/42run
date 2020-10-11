@@ -15,7 +15,9 @@ static std::string loadShader(const char *filepath)
 	if (data.fail())
 		error(".shader file not found");
 	while (std::getline(data, line))
+	{
 		str << line << '\n';
+	}
 	return str.str();
 }
 
@@ -56,6 +58,11 @@ shader::shader(const char* vertexPath, const char* fragmentPath)
 	program = glCreateProgram();
 	unsigned int vs = compileShader(GL_VERTEX_SHADER, vertexShader);
 	unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
+	if (vs == 0 || fs == 0)
+	{
+		program = 0;
+		return ;
+	}
 	glAttachShader(program, vs);
 	glAttachShader(program, fs);
 	glLinkProgram(program);

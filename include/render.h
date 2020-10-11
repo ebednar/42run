@@ -1,20 +1,24 @@
 #ifndef RENDER_H
 # define RENDER_H
 
+# include "model.h"
+
 enum status
 {FAIL, SUCCESS};
 
 class render
 {
+public:
+	Model* mod;
 private:
-	unsigned int	vbo;
-	unsigned int	shader_id;
 	status			stat;
 public:
 	render();
-	void			vertexBuffer(float* vertices);
-	void			createShader(char* vertShader, char* fragShader);
+	void			set_model(Model *mod);
+	void			vertexBuffer();
+	void			createShader(char *vertShader, char *fragShader);
 	bool			getStatus();
+	void			draw_frame();
 	~render();
 };
 

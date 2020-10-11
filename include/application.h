@@ -2,6 +2,7 @@
 # define APPLICATION_H
 
 # include "render.h"
+# include "events.h"
 
 struct GLFWwindow
 {
@@ -11,10 +12,9 @@ class application
 {
 public:
 	render rend;
-	bool keys[1024];
 
 private:
-	GLFWwindow* window;
+	GLFWwindow *window;
 public:
 	application();
 	~application();

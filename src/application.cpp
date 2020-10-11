@@ -1,7 +1,6 @@
 # define GL_SILENCE_DEPRECATION
 # define GLFW_INCLUDE_GLCOREARB
 
-#include <GLFW/glfw3.h>
 #include "42run.h"
 #include "application.h"
 #include "utils.h"
@@ -15,22 +14,6 @@ static bool		init_glfw()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	return 0;
-}
-
-static	void	key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-	application* app = (application*)glfwGetWindowUserPointer(window);
-	if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-    	glfwSetWindowShouldClose(window, GL_TRUE);
-	if (key >= 0 && key < 1024)
-    {
-        if (action == GLFW_PRESS)
-            app->keys[key] = true;
-        else if (action == GLFW_RELEASE)
-            app->keys[key] = false;
-    }
-	scancode = 0;
-	mode = 0;
 }
 
 application::application()
@@ -47,27 +30,33 @@ application::application()
 application::~application()
 {
 	logln("app closed");
-	glfwTerminate();
+	
+	logln("glfw terminated");
 }
 void application::run()
 {
-	// temporary mesh
-	float vertices[] = {
-    -0.5f, -0.5f, 0.0f,
-     0.5f, -0.5f, 0.0f,
-     0.0f,  0.5f, 0.0f
-	};
-	vertices[0] = -0.5f;
+	Model cube;
+	rend.set_model(&cube);
 	rend.createShader((char *)"res/shaders/vertex.shader", (char *)"res/shaders/fragment.shader");
+	rend.vertexBuffer();
+	EventMaster ev;
+	glfwSetWindowUserPointer(window, &ev);
+	glfwSetKeyCallback(window, key_callback);
     while (!glfwWindowShouldClose(window))
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-        glfwSwapBuffers(window);
-
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
 		if (!rend.getStatus())
+		{
+			log("can`t draw object - ");
+			logln(cube.name);
 			break ;
-
-		glfwSetKeyCallback(window, key_callback);
-        glfwPollEvents();
+		}
+		rend.draw_frame();
+		glfwSwapBuffers(window);
+		ev.get_events();
+        
     }
+	logln("------end of cycle------");
+	glfwTerminate();
 }
