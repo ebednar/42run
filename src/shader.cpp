@@ -1,23 +1,20 @@
-#define GL_SILENCE_DEPRECATION
-
-#include <OpenGL/gl.h>
+# define GL_SILENCE_DEPRECATION
+#include <OpenGL/gl3.h>
+#include <iostream>
 #include <fstream>
 #include <sstream>
-#include "shader.h"
-#include "utils.h"
+#include "Shader.h"
 
-static std::string loadShader(const char *filepath)
+static std::string loadShader(const char* filepath)
 {
 	std::ifstream data(filepath);
 	std::string line;
 	std::stringstream str;
 
 	if (data.fail())
-		error(".shader file not found");
+		std::cout << ".shader file not found" << std::endl;
 	while (std::getline(data, line))
-	{
 		str << line << '\n';
-	}
 	return str.str();
 }
 
@@ -35,10 +32,12 @@ static unsigned int compileShader(unsigned int type, const std::string source)
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
 		char* message = new char[length + 1];
 		glGetShaderInfoLog(id, length, &length, message);
-		error("");
-		type == GL_VERTEX_SHADER ? log("vertex ") : log("fragment ");
-		logln("shader compilation failed");
-		log(message);
+		if (type == GL_VERTEX_SHADER)
+			std::cout << "vertex "; 
+		else
+			std::cout << "fragment ";
+		std::cout << "shader compilation failed" << std::endl;
+		std::cout << message << std::endl;
 		delete[](message);
 		glDeleteShader(id);
 		return 0;
@@ -46,49 +45,40 @@ static unsigned int compileShader(unsigned int type, const std::string source)
 	return id;
 }
 
-shader::shader(const char* vertexPath, const char* fragmentPath)
-{	
+int CreateShader(int *program, const char *vertexPath, const char *fragmentPath)
+{
 	std::string vertexShader = loadShader(vertexPath);
 	std::string fragmentShader = loadShader(fragmentPath);
 	if (vertexShader.empty() || fragmentShader.empty())
 	{
-		program = 0;
-		return ;
+		*program = 0;
+		return 0;
 	}
-	program = glCreateProgram();
+	*program = glCreateProgram();
 	unsigned int vs = compileShader(GL_VERTEX_SHADER, vertexShader);
 	unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
 	if (vs == 0 || fs == 0)
 	{
-		program = 0;
-		return ;
+		*program = 0;
+		return 0;
 	}
-	glAttachShader(program, vs);
-	glAttachShader(program, fs);
-	glLinkProgram(program);
+	glAttachShader(*program, vs);
+	glAttachShader(*program, fs);
+	glLinkProgram(*program);
 	int result;
-	glGetProgramiv(program, GL_LINK_STATUS, &result);
+	glGetProgramiv(*program, GL_LINK_STATUS, &result);
 	if (!result)
 	{
 		int length;
-		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
+		glGetProgramiv(*program, GL_INFO_LOG_LENGTH, &length);
 		char* message = new char[length + 1];
-		glGetProgramInfoLog(program, length, &length, message);
-		error("link error");
-		log(message);
+		glGetProgramInfoLog(*program, length, &length, message);
+		std::cout << "link error" << std::endl;
+		std::cout << message << std::endl;
 		delete[](message);
 	}
-	glValidateProgram(program);
+	glValidateProgram(*program);
 	glDeleteShader(vs);
 	glDeleteShader(fs);
-}
-
-unsigned int shader::getProgramID() const
-{
-	return program;
-}
-
-shader::~shader()
-{
-	logln("shader deleted");
+	return *program;
 }

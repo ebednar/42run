@@ -1,25 +1,16 @@
 #ifndef RENDER_H
 # define RENDER_H
-
-# include "model.h"
-
-enum status
-{FAIL, SUCCESS};
-
-class render
+# include "Model.h"
+# include <vector>
+class Render
 {
 public:
-	Model* mod;
-private:
-	status			stat;
+	void AddModel(Model *mod);
+	void DrawModels();
+
 public:
-	render();
-	void			set_model(Model *mod);
-	void			vertexBuffer();
-	void			createShader(char *vertShader, char *fragShader);
-	bool			getStatus();
-	void			draw_frame();
-	~render();
+private:
+	std::vector<Model*> models;
 };
 
 #endif
