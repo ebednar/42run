@@ -12,10 +12,16 @@
 
 NAME = 42run
 SRC =	./src/main.cpp \
-		./src/Render.cpp \
-		./src/Shader.cpp \
-		./src/Events.cpp \
-		./src/Model.cpp
+		./src/engine.cpp \
+		./src/render.cpp \
+		./src/shader.cpp \
+		./src/events.cpp \
+		./src/model.cpp \
+		./src/entity.cpp \
+		./src/camera.cpp \
+		./src/init_level.cpp \
+		./src/game_loop.cpp \
+		./src/controls.cpp
 OBJECTS = $(SRC:.cpp=.o)
 FLAGS = -std=c++11 -Wall -Wextra -Werror
 INCLUDES = -I include -I GLFW/include

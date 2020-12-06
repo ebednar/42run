@@ -1,16 +1,17 @@
 #ifndef RENDER_H
 # define RENDER_H
-# include "Model.h"
-# include <vector>
+
+#include "entity.h"
+#include <vector>
+#include "camera.h"
+
 class Render
 {
 public:
-	void AddModel(Model *mod);
-	void DrawModels();
-
+	Entity *player;
 public:
+	void	draw_scene(std::vector<Entity *> scene, glm::vec3 **lights, Camera *cam, bool free_cam);
 private:
-	std::vector<Model*> models;
 };
 
 #endif
