@@ -30,6 +30,10 @@ struct state
 	Entity		*current_light;
 	Entity		*next_light;
 	Entity		*prev_light;
+	Entity		**obst1;
+	Entity		**obst2;
+	Entity		**coins1;
+	Entity		**coins2;
 	bool		rotate;
 	float		frames;
 	next_dir	current;
@@ -41,6 +45,9 @@ struct state
 	int			shift;
 	bool		shifting;
 	bool		shift_rotate;
+	int			delay;
+	bool		jump;
+	float		jump_time;
 };
 
 void	init_game(Engine* eng, state* state);
@@ -48,5 +55,4 @@ void	game_loop(Engine* eng);
 void	controls(Engine* eng);
 void	shift_player_l(Engine* eng);
 void	shift_player_r(Engine* eng);
-
 #endif

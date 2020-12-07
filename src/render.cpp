@@ -23,8 +23,6 @@ void Render::draw_scene(std::vector<Entity *> scene, glm::vec3 **lights, Camera 
 	test[6] = lights[2]->x;
 	test[7] = lights[2]->y;
 	test[8] = lights[2]->z;
-	//std::cout << sizeof(glm::vec3) << std::endl;
-
 	for (int i = 0; i < length; ++i)
 	{
 		Entity	*ent = scene[i];
@@ -48,18 +46,19 @@ void Render::draw_scene(std::vector<Entity *> scene, glm::vec3 **lights, Camera 
 		unsigned int proj_loc = glGetUniformLocation(mod->shader_id, "u_P");
 		glUniformMatrix4fv(proj_loc, 1, GL_FALSE, glm::value_ptr(projection));
 
+		//glUniform3f(glGetUniformLocation(mod->shader_id, "lightPos"), lights[0]->position.x, lights[0]->position.y, lights[0]->position.z);
 		glUniform1i(glGetUniformLocation(mod->shader_id, "lightNumb"), 3);
 		glUniform3fv(glGetUniformLocation(mod->shader_id, "lightPos"), 3, test);
 		glUniform3f(glGetUniformLocation(mod->shader_id, "viewPos"), cam->pos.x, cam->pos.y, cam->pos.z);
 		glUniform1i(glGetUniformLocation(mod->shader_id, "material.diffuse"), 0);
 		glUniform3f(glGetUniformLocation(mod->shader_id, "material.specular"), 0.5f, 0.5f, 0.5f);
 		glUniform1f(glGetUniformLocation(mod->shader_id, "material.shininess"), 16.0f);
-		glUniform3f(glGetUniformLocation(mod->shader_id, "light.ambient"), 0.2f, 0.2f, 0.2f);
-		glUniform3f(glGetUniformLocation(mod->shader_id, "light.diffuse"), 0.7f, 0.7f, 0.7f);
-		glUniform3f(glGetUniformLocation(mod->shader_id, "light.specular"), 0.7f, 0.7f, 0.7f);
+		glUniform3f(glGetUniformLocation(mod->shader_id, "light.ambient"), 0.3f, 0.3f, 0.3f);
+		glUniform3f(glGetUniformLocation(mod->shader_id, "light.diffuse"), 0.8f, 0.8f, 0.8f);
+		glUniform3f(glGetUniformLocation(mod->shader_id, "light.specular"), 0.5f, 0.5f, 0.5f);
 		glUniform1f(glGetUniformLocation(mod->shader_id, "light.constant"), 1.0f);
 		glUniform1f(glGetUniformLocation(mod->shader_id, "light.linear"), 0.07f);
 		glUniform1f(glGetUniformLocation(mod->shader_id, "light.quadratic"), 0.017f);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawArrays(GL_TRIANGLES, 0, mod->ind_number);
 	}
 }
