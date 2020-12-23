@@ -1,19 +1,5 @@
 #include "42run.h"
 
-void replace_light(Engine* eng)
-{
-	if (eng->state->next == forw)
-		eng->state->prev_light->move_to(eng->state->plat_start[0] + 15.0f, 2.0f, eng->state->plat_start[2]);
-	else if (eng->state->next == right)
-		eng->state->prev_light->move_to(eng->state->plat_start[0], 2.0f, eng->state->plat_start[2] + 15.0f);
-	else if (eng->state->next == left)
-		eng->state->prev_light->move_to(eng->state->plat_start[0], 2.0f, eng->state->plat_start[2] - 15.0f);
-	Entity* ptr = eng->state->prev_light;
-	eng->state->prev_light = eng->state->current_light;
-	eng->state->current_light = eng->state->next_light;
-	eng->state->next_light = ptr;
-}
-
 void rand_next_platform(Engine *eng)
 {
 	int next = rand() % 3;
