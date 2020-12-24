@@ -19,9 +19,12 @@ SRC =	./src/main.cpp \
 		./src/model.cpp \
 		./src/entity.cpp \
 		./src/camera.cpp \
+		./src/skybox.cpp \
+		./src/ui_text.cpp \
 		./src/init_level.cpp \
 		./src/game_loop.cpp \
-		./src/controls.cpp
+		./src/controls.cpp \
+		./src/replace.cpp
 OBJECTS = $(SRC:.cpp=.o)
 FLAGS = -std=c++11 -Wall -Wextra -Werror
 INCLUDES = -I include -I GLFW/include
