@@ -52,6 +52,7 @@ void Engine::init_engine(int width, int height)
 	faces.push_back("res/cubemaps/back.jpg");
 	skybox.init(faces);
 	skybox.set_shader("res/shaders/skybox_vert.glsl", "res/shaders/skybox_frag.glsl");
+
 }
 
 void Engine::run_engine(void (*func)(Engine *))

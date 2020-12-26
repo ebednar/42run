@@ -3,12 +3,12 @@
 void	generate_obst(Engine* eng, Entity** obst)
 {
 	int raw;
-	int line = 6;
+	int line = 7;
 
 	for (int i = 0; i < 6; ++i)
 	{
 		raw = rand() % 3 - 1;
-		line += rand() % 3 + 1;
+		line += rand() % 4 + 1;
 		obst[i]->move_to(eng->state->plat_end[0] + line, -0.75f, eng->state->plat_end[2] + raw);
 	}
 }
@@ -16,7 +16,7 @@ void	generate_obst(Engine* eng, Entity** obst)
 void	generate_coins(Engine* eng, Entity** coins)
 {
 	int raw;
-	int line = 6;
+	int line = 7;
 
 	for (int i = 0; i < 6; ++i)
 	{
@@ -217,9 +217,8 @@ void		init_game(Engine* eng, state* state)
 	create_coins(eng);
 	init_data(eng, eng->state);
 	create_platform(eng, state);
-	eng->free_cam = false;
 	if (!eng->free_cam)
 	{
-		eng->cam.pos.y = 2.3f;
+		eng->cam.pos.y = 2.0f;
 	}
 }

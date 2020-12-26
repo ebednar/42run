@@ -62,4 +62,5 @@ void	shift_player_r(Engine* eng);
 void	replace_platform(Engine* eng);
 void	replace_light(Engine* eng);
 void	detect_collision(Engine* eng);
+
 #endif

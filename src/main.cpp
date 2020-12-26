@@ -1,8 +1,7 @@
 #include "42run.h"
 #include <time.h>
-//#include "irrKlang.h"
 
-int		main(void)
+int		main(int argc, char **argv)
 {
 	Engine	engine;
 	state	state;
@@ -10,9 +9,11 @@ int		main(void)
 	srand(time(NULL));
 	engine.init_engine(WIDTH, HEIGHT);
 	engine.state = &state;
+	if (argc == 2 && !strcmp(argv[1], "-f"))
+	{
+			engine.free_cam = true;
+	}
 	init_game(&engine, &state);
-	//irrklang::ISoundEngine* sound_engine = irrklang::createIrrKlangDevice();
-	//sound_engine->play2D("", true);
 	engine.run_engine(game_loop);
 	delete(engine.state->current_plat);
 	delete(engine.state->next_plat);

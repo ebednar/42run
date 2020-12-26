@@ -6,7 +6,7 @@
 #    By: ebednar <ebednar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 14:23:06 by twitting          #+#    #+#              #
-#    Updated: 2020/12/26 14:17:26 by ebednar          ###   ########.fr        #
+#    Updated: 2020/12/26 14:42:04 by ebednar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC =	./src/main.cpp \
 		./src/replace.cpp \
 		./src/collision.cpp
 OBJECTS = $(SRC:.cpp=.o)
-FLAGS = -std=c++11 -Wall -Wextra -Werror
+FLAGS = -std=c++11 
 INCLUDES = -I include -I GLFW/include
 FRAMEWORKS = -framework OpenGL -framework Cocoa -framework IOKit
 LIBGLFW = -L./GLFW/lib-macos -lglfw3
