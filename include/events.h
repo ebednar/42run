@@ -3,6 +3,11 @@
 
 struct Controls
 {
+	Controls()
+	{
+		for (int i = 0; i < 1024; ++i)
+			keys[i] = false;
+	};
 	float	last_x;
 	float	last_y;
 	float	yaw;

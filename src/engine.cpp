@@ -14,6 +14,9 @@ Engine::~Engine()
 	length = scene.size();
 	for (int i = 0; i < length; ++i)
 		delete scene[i];
+	length = text.size();
+	for (int i = 0; i < length; ++i)
+		delete text[i];
 	std::cout << "Engine off" << std::endl;
 }
 
@@ -42,7 +45,10 @@ void Engine::init_engine(int width, int height)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	controls.yaw = cam.yaw;
 	controls.pitch = cam.pitch;
+	texter.init();
+	texter.set_shader("res/shaders/ui_text_vertex.glsl", "res/shaders/ui_text_fragment.glsl");
 	rend.init();
+	texter.vertex_buffer();
 	std::vector<std::string> faces;
 	faces.push_back("res/cubemaps/right.jpg");
 	faces.push_back("res/cubemaps/left.jpg");
@@ -79,6 +85,7 @@ void Engine::run_engine(void (*func)(Engine *))
 
 		rend.draw_skybox(&skybox, &cam);
 		rend.draw_scene(scene, light_pos, &cam, free_cam);
+		rend.draw_ui(&texter, text);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -117,4 +124,15 @@ void Engine::set_lights_pos()
 	{
 		light_pos[i] = &light_sources[i]->position;
 	}
+}
+
+void	 Engine::add_text_ui(std::string str, float x, float y, float scale)
+{
+	text_t *txt = new text_t(str, x, y, scale);
+	text.push_back(txt);
+}
+
+void	 Engine::change_text(std::string str, int id)
+{
+	text[id]->str = str;
 }

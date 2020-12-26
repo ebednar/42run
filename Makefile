@@ -6,7 +6,7 @@
 #    By: ebednar <ebednar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 14:23:06 by twitting          #+#    #+#              #
-#    Updated: 2020/12/26 14:42:04 by ebednar          ###   ########.fr        #
+#    Updated: 2020/12/26 17:11:42 by ebednar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,13 @@ SRC =	./src/main.cpp \
 		./src/game_loop.cpp \
 		./src/controls.cpp \
 		./src/replace.cpp \
-		./src/collision.cpp
+		./src/collision.cpp \
+		./src/ui_text.cpp
 OBJECTS = $(SRC:.cpp=.o)
 FLAGS = -std=c++11 
 INCLUDES = -I include -I GLFW/include
 FRAMEWORKS = -framework OpenGL -framework Cocoa -framework IOKit
-LIBGLFW = -L./GLFW/lib-macos -lglfw3
+LIBGLFW = -L./GLFW/lib-macos -lglfw3 -L/Users/ebednar/.brew/lib -lfreetype
 
 all: $(NAME)
 
