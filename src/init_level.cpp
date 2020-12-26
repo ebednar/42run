@@ -217,8 +217,6 @@ void		init_game(Engine* eng, state* state)
 	create_coins(eng);
 	init_data(eng, eng->state);
 	create_platform(eng, state);
-	eng->add_text_ui("0", WIDTH / 2 - 20, HEIGHT - 40, 0.5f);
-	eng->add_text_ui("coins: 0", WIDTH - 170, HEIGHT - 40, 0.5f);
 	eng->free_cam = false;
 	if (!eng->free_cam)
 	{

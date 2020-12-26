@@ -6,7 +6,7 @@
 #    By: ebednar <ebednar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/20 14:23:06 by twitting          #+#    #+#              #
-#    Updated: 2020/03/15 23:03:11 by ebednar          ###   ########.fr        #
+#    Updated: 2020/12/26 14:17:26 by ebednar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ SRC =	./src/main.cpp \
 		./src/entity.cpp \
 		./src/camera.cpp \
 		./src/skybox.cpp \
-		./src/ui_text.cpp \
 		./src/init_level.cpp \
 		./src/game_loop.cpp \
 		./src/controls.cpp \
-		./src/replace.cpp
+		./src/replace.cpp \
+		./src/collision.cpp
 OBJECTS = $(SRC:.cpp=.o)
 FLAGS = -std=c++11 -Wall -Wextra -Werror
 INCLUDES = -I include -I GLFW/include

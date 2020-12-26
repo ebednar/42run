@@ -48,15 +48,16 @@ int ui_text::init()
         // now store character for later use
         character charact = {
             texture,
-            {face->glyph->bitmap.width, face->glyph->bitmap.rows},
-            {face->glyph->bitmap_left, face->glyph->bitmap_top},
-            face->glyph->advance.x
+            {static_cast<float>(face->glyph->bitmap.width), static_cast<float>(face->glyph->bitmap.rows)},
+            {static_cast<float>(face->glyph->bitmap_left), static_cast<float>(face->glyph->bitmap_top)},
+            static_cast<unsigned int>(face->glyph->advance.x)
         };
         characters.insert(std::pair<char, character>(c, charact));
     }
     glBindTexture(GL_TEXTURE_2D, 0);
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
+    return (0);
 }
 
 void    ui_text::set_shader(const char* vPath, const char* fSPath)

@@ -4,7 +4,6 @@
 #include "entity.h"
 #include <vector>
 #include "camera.h"
-#include "ui_text.h"
 #include "skybox.h"
 
 struct vec3
@@ -22,7 +21,6 @@ public:
 	void	init();
 	void	set_lights_pos(glm::vec3 **lights, int numb);
 	void	draw_scene(std::vector<Entity *> scene, glm::vec3 **lights, Camera *cam, bool free_cam);
-	void	draw_ui(ui_text *Texter, std::vector<text_t*> text);
 	void	draw_skybox(Skybox *skybox, Camera* cam);
 private:
 	glm::mat4	projection;
