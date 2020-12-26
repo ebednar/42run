@@ -14,7 +14,9 @@ int		main(int argc, char **argv)
 			engine.free_cam = true;
 	}
 	init_game(&engine, &state);
+	system("afplay res/music/Day.mp3 -v 0.9 &");
 	engine.run_engine(game_loop);
+	system("killall afplay");
 	delete(engine.state->current_plat);
 	delete(engine.state->next_plat);
 	delete(engine.state->obst1);
